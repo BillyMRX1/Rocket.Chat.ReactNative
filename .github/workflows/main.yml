@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build Android APK
-        run: |
-          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-          cd android
-          ./gradlew assembleRelease
+      - name: React Native Android Build APK
+        uses: realabbas/Github-Actions-React-Native@v1.1.2
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.3
