@@ -61,7 +61,7 @@ jobs:
           
       - name: Generate App APK
         run: |
-          ./gradlew bundleExperimentalPlayRelease --no-daemon
+          ./gradlew assembleExperimentalPlayDebug --no-daemon
           
       - name: Store Artifacts
         uses: actions/upload-artifact@v3
