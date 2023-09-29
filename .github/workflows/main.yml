@@ -25,8 +25,8 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v3
 
-      - name: Decode Keystore
-        run: echo ${{ secrets.KEYSTORE_BASE_64 }} | base64 -d > ./app/key.keystore
+      # - name: Decode Keystore
+      #   run: echo ${{ secrets.KEYSTORE_BASE_64 }} | base64 -d > ./app/key.keystore
 
       - uses: c-hive/gha-yarn-cache@v2
 
@@ -49,17 +49,18 @@ jobs:
           echo -e "" > ./gradle.properties
           echo -e android.useAndroidX=true >> ./gradle.properties
           echo -e android.enableJetifier=true >> ./gradle.properties
-          echo -e FLIPPER_VERSION=0.51.0 >> ./gradle.properties
+          echo -e FLIPPER_VERSION=0.175.0 >> ./gradle.properties
           echo -e VERSIONCODE=${{ github.run_number }} >> ./gradle.properties
           echo -e APPLICATION_ID=chat.rocket.reactnative >> ./gradle.properties
-          echo -e BugsnagAPIKey=${{ secrets.BUGSNAG_KEY }} >> ./gradle.properties
           echo -e KEYSTORE=${{ secrets.KEYSTORE }} >> ./gradle.properties
           echo -e KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }} >> ./gradle.properties
           echo -e KEY_ALIAS=${{ secrets.KEY_ALIAS }} >> ./gradle.properties
           echo -e KEY_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }} >> ./gradle.properties
+          
       - name: Generate App APK
         run: |
           ./gradlew bundleExperimentalPlayRelease --no-daemon
+          
       - name: Store Artifacts
         uses: actions/upload-artifact@v3
         with:
