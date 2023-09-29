@@ -67,4 +67,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app.bundle-${{ github.event.number }}
-          path: app/build/generated/assets/react/experimentalPlay/release/app.bundle
+          path: app/build/generated/assets/react/experimentalPlay/debug/app.bundle
