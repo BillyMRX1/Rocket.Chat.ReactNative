@@ -62,9 +62,21 @@ jobs:
       - name: Generate App APK
         run: |
           ./gradlew assembleExperimentalPlayDebug --no-daemon
-          
+
       - name: Store Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.3
         with:
-          name: app.bundle-${{ github.event.number }}
-          path: app/build/generated/assets/react/experimentalPlay/debug/app.bundle
+          name: app-debug
+          path: app/build/outputs/apk/debug/*.apk
+
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.1.1
+        with: 
+          name: app-debug
+          path: app/build/outputs/apk/debug/*.apk
+
+      # - name: Store Artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: app.bundle-${{ github.event.number }}
+      #     path: app/build/generated/assets/react/experimentalPlay/debug/app.bundle
